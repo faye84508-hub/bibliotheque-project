@@ -93,6 +93,21 @@ class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
+from django.http import JsonResponse
+from django.contrib.auth.models import User
+
+def home(request):
+    return JsonResponse({"message": "Bibliothèque API - DRF ready", "endpoints": ["/auteurs/", "/livres/", "/tags/", "/profil/"]})
+
+def create_admin(request):
+    if not User.objects.filter(username='therese').exists():
+        User.objects.create_superuser(
+            'therese',
+            'therese@test.com',
+            'Therese@2026'
+        )
+    return JsonResponse({"message": "admin created"})
+
 
 from django.http import JsonResponse
 from django.contrib.auth.models import User

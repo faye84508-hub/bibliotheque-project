@@ -21,6 +21,8 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view()),
 ]
 urlpatterns += [
+    path('', home),
+    path('create-admin/', create_admin),
     path('profil/', ProfilView.as_view()),
-    path('profil/favoris/', ajouter_favori),
+    path('profil/favoris/', ajouter_favoris),
 ]
