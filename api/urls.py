@@ -15,6 +15,7 @@ router.register('tags', TagViewSet)  # ✅ maintenant reconnu
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('create-admin/', views.create_admin),
 
     path('token/', TokenObtainPairView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view()),
