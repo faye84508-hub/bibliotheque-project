@@ -27,7 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 import os
 SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-dev-key') 
 
-ALLOWED_HOSTS =['bibliotheque-project.onrender.com']
+ALLOWED_HOSTS = [
+    "bibliotheque-project-1-nv0z.onrender.com",
+    "localhost",
+    "127.0.0.1"
+]
 DEBUG = False
 
 
