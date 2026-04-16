@@ -19,20 +19,6 @@ urlpatterns = [
     path('token/', TokenObtainPairView.as_view()),
     path('token/refresh/', TokenRefreshView.as_view()),
 ]
-@action(detail=True, methods=['post'])
-def emprunter(self, request, pk=None):
-    livre = self.get_object()
-
-    if not livre.disponible:
-        return Response(
-            {"erreur": "Livre non disponible"},
-            status=status.HTTP_400_BAD_REQUEST
-        )
-
-    livre.disponible = False
-    livre.save()
-
-    return Response({"message": f"{livre.titre} emprunté"})
 urlpatterns += [
     path('profil/', ProfilView.as_view()),
     path('profil/favoris/', ajouter_favori),

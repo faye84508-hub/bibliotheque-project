@@ -50,7 +50,10 @@ class ProfilView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        return Response(serializer.errors, status=400)
+        return Response({
+            "erreur": "Données de profil invalides",
+            "details": serializer.errors
+        }, status=400)
 
 
 
@@ -71,14 +74,18 @@ class LivreViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def emprunter(self, request, pk=None):
         livre = self.get_object()
-
+        if not livre:
+            return Response({"erreur": "Livre non trouvé"}, status=404)
         if not livre.disponible:
-            return Response({"erreur": "Livre non disponible"}, status=400)
+            return Response({
+                "erreur": "Livre non disponible",
+                "details": f"{livre.titre} est déjà emprunté."
+            }, status=400)
 
         livre.disponible = False
         livre.save()
 
-        return Response({"message": "Livre emprunté"})
+        return Response({"message": f"Livre '{livre.titre}' emprunté avec succès"})
 
 
 # ✅ TAG

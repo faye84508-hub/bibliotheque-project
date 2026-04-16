@@ -1,27 +1,12 @@
-# Django PostgreSQL Connection Fix - TODO List
+# TODO: Fix 400 Bad Request Error in Django DRF API
 
-## Approved Plan Steps (User confirmed: yes)
+## Steps:
+1. [x] Clean up api/urls.py: Remove duplicated `@action` code block at bottom.
+2. [x] Update api/views.py: Improve error Responses in ProfilView.put() and LivreViewSet.emprunter() with French wrappers.
+3. [x] Read and update api/serializers.py: Add French validation messages.
+4. [x] Check/update bibliotheque_project/settings.py: Add DRF exception config.
+5. [x] Test endpoints locally (run `python manage.py runserver` and test PUT /api/profil/, POST /api/livres/1/emprunter/).
+6. [ ] Add/update tests in api/tests.py (optional).
+7. [x] Migrations if needed (no changes).
 
-**Goal:** Fix PostgreSQL connection error, enable migrations/server.
-
-**Step 1: [DONE] PostgreSQL check**
-- No service/pg tools found → Not installed.
-
-**Step 2: [PENDING] Setup PostgreSQL (if needed)**
-- Install if missing
-- Start service
-- Create DB `bibliotheque` and user `postgres`/`postgres`
-
-**Step 3: [DONE] Switch to SQLite**
-- Update settings.py ✓
-- Remove db.sqlite3 ✓
-- Run migrations ✓
-
-**Step 4: [DONE] Migrations**
-- All api/admin/auth migrations applied OK ✓
-
-**Step 5: [PENDING] Test server**
-- `python manage.py runserver`
-- Create superuser if needed
-
-**Current Status:** Ready for Step 1. Updates will mark [DONE].
+**All core fixes complete!** 400 errors now return detailed French messages.
