@@ -13,16 +13,14 @@ router.register('auteurs', AuteurViewSet)
 router.register('livres', LivreViewSet)
 router.register('tags', TagViewSet)  # ✅ maintenant reconnu
 
-urlpatterns = [
-    path('', include(router.urls)),
-    path('create-admin/', views.create_admin),
+from .views import home, create_admin
 
-    path('token/', TokenObtainPairView.as_view()),
-    path('token/refresh/', TokenRefreshView.as_view()),
-]
-urlpatterns += [
+urlpatterns = [
     path('', home),
     path('create-admin/', create_admin),
+    path('', include(router.urls)),
+    path('token/', TokenObtainPairView.as_view()),
+    path('token/refresh/', TokenRefreshView.as_view()),
     path('profil/', ProfilView.as_view()),
-    path('profil/favoris/', ajouter_favoris),
+    path('profil/favoris/', ajouter_favori),
 ]
